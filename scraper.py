@@ -19,10 +19,6 @@ def generateResults():
         title_element = results.find("span", {"class":"title"})
         price_element = results.find("span", {"class":"money"})
         thumbnail_element = results.find("img", {"class":"primary"})
-        print(title_element.text.strip())
-        print(price_element.text.strip())
-        print(thumbnail_element["data-original"])
-        print()
         
         web_data.append({"Title": title_element.text.strip(), "Price": price_element.text.strip(), "Image": thumbnail_element["data-original"]})
         
