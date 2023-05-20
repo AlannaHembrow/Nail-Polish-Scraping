@@ -23,7 +23,7 @@ def generateResults():
         web_data.append({"Title": title_element.text.strip(), "Price": price_element.text.strip(), "URL": url_clean_element.strip(), "Image": thumbnail_element["data-original"]})
         
     results_df = pd.DataFrame(web_data)
-    results_df.to_json('data/exported_results.json', orient='records', lines=True)
+    results_df.to_json('data/exported_results.json', orient='records')
     print(results_df)
 
 # Check if request to website is successful    
