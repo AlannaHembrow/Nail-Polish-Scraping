@@ -12,22 +12,26 @@ soup = BeautifulSoup(response.text, 'html.parser')
 
 web_data = []
 
-resultList = soup.find_all("div", {"class":"one-third"})
+result_list = soup.find_all("div", {"class":"one-third"})
 
 def generateResults():
-    for results in resultList:
+    for results in result_list:
         title_element = results.find("span", {"class":"title"})
         price_element = results.find("span", {"class":"money"})
         thumbnail_element = results.find("img", {"class":"primary"})
+        url_element = results.find("a", {"class":"sc-pb-element"})
+        url_clean_element = "https://rainbow-connection.co.uk" + url_element['href']
         
-        web_data.append({"Title": title_element.text.strip(), "Price": price_element.text.strip(), "Image": thumbnail_element["data-original"]})
+        web_data.append({"Title": title_element.text.strip(), "Price": price_element.text.strip(), "URL": url_clean_element.strip(), "Image": thumbnail_element["data-original"]})
         
+    results_df = pd.DataFrame(web_data)
+    print(results_df)
+
+# Check if request to website is successful    
 if response.ok is False:
     print(f"Get request failed - Error Code:", {response.status_code})
 else:
     generateResults()
-    
-print(web_data)
 
 
 
